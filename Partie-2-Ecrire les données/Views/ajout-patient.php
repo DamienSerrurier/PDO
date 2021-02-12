@@ -1,4 +1,5 @@
 <?php
+// Récupération du fichier controller correspondant à cette page.
 require '../Controllers/ajout-patient-controller.php';
 ?>
 
@@ -14,8 +15,10 @@ require '../Controllers/ajout-patient-controller.php';
 
 <body>
     <div>
+        <!--Affiche le message de réussite de l'enregistrement.-->
         <p><?= isset($message) ? $message : '' ?></p>
     </div>
+    <!-- Formulaire d'enregistrement -->
     <form action="ajout-patient.php" method="post">
         <div>
             <label for="lastname">Nom : </label>
