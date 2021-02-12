@@ -34,19 +34,19 @@ if (!empty($_POST)) {
     }
 
     if (preg_match($regexDate, $birthdate)) {
-        var_dump($checkBirthdate);
+        $checkBirthdate = $birthdate;
     } else {
         $arrayErrors['birthdate'] = 'Veuillez indiquer une donnée correcte';
     }
 
     if (preg_match($regexPhone, $phone)) {
-        var_dump($checkPhone);
+        $checkPhone = $phone;
     } else {
         $arrayErrors['phone'] = 'Veuillez indiquer une donnée correcte';
     }
 
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        var_dump($checkEmail);
+        $checkEmail = $email;
     } else {
         $arrayErrors['email'] = 'Veuillez indiquer une donnée correcte';
     }
@@ -64,10 +64,10 @@ if (!empty($_POST)) {
         ];
 
         // Création d'une instance d'un objet.
-        $patients = new Patients();
+        $patient = new Patients();
 
         // Utilisation d'une méthode pour l'excution de la requête
-        if ($patients->addPatient($arrayParameters)) {
+        if ($patient->addPatient($arrayParameters)) {
             $message = 'Le patient a été enregistrer';
         } else {
             $message = 'Il y a eu une erreur lors de l\'ajout du patient';
