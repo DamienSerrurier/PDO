@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require '../Models/Database.php';
 require '../Models/Patients.php';
 
@@ -12,7 +14,7 @@ if ((isset($_GET['idPatient'])) && !empty($_GET['idPatient'])) {
 
     if (preg_match($regexId, $id)) {
         $verifiedId = (int)$id;
-        $patientInformation =  $patient->addOnePatientInformation($verifiedId);
+        $patientInformations =  $patient->addOnePatientInformation($verifiedId);
     } else {
         $errorMessage = 'Arrête de jouer avec mon URL!';
     }
