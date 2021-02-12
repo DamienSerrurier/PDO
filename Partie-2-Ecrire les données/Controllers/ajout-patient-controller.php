@@ -1,6 +1,6 @@
 <?php
 // Récupérations des class
-require '../Models/DataBase.php';
+require '../Models/Database.php';
 require '../Models/Patients.php';
 
 // Vérification si la variable super global $_POST n'est pas vide.
@@ -23,34 +23,29 @@ if (!empty($_POST)) {
     // Utilisation de preg_match pour vérifier si les données sont conforment à ce qui est accordées par la regex.
     if (preg_match($regexText, $lastname)) {
         $checkLastname = $lastname;
-        var_dump($checkLastname);
     } else {
         $arrayErrors['lastname'] = 'Veuillez indiquer une donnée correcte';
     }
 
     if (preg_match($regexText, $firstname)) {
         $checkFirstname = $firstname;
-        var_dump($checkFirstname);
     } else {
         $arrayErrors['firstname'] = 'Veuillez indiquer une donnée correcte';
     }
 
     if (preg_match($regexDate, $birthdate)) {
-        $checkBirthdate = $birthdate;
         var_dump($checkBirthdate);
     } else {
         $arrayErrors['birthdate'] = 'Veuillez indiquer une donnée correcte';
     }
 
     if (preg_match($regexPhone, $phone)) {
-        $checkPhone = $phone;
         var_dump($checkPhone);
     } else {
         $arrayErrors['phone'] = 'Veuillez indiquer une donnée correcte';
     }
 
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $checkEmail = $email;
         var_dump($checkEmail);
     } else {
         $arrayErrors['email'] = 'Veuillez indiquer une donnée correcte';
