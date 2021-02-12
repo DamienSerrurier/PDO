@@ -126,7 +126,7 @@ class Patients extends Database
 
     public function updatePatient($arrayParameters)
     {
-        $query = "UPDATE `patients` SET `lastname` = :lastname, `firstname` = :firstname, `birthdate` = :birthdate `phone` = :phone,`mail` = :mail WHERE `id` = :id";
+        $query = "UPDATE `patients` SET `lastname` = :lastname, `firstname` = :firstname, `birthdate` = :birthdate, `phone` = :phone, `mail` = :mail WHERE `id` = :id";
         $buildQuery = parent::getDatabase()->prepare($query);
         $buildQuery->bindValue('id', $arrayParameters['id'], PDO::PARAM_INT);
         $buildQuery->bindValue('lastname', $arrayParameters['lastname'], PDO::PARAM_STR);
@@ -134,6 +134,6 @@ class Patients extends Database
         $buildQuery->bindValue('birthdate', $arrayParameters['birthdate'], PDO::PARAM_STR);
         $buildQuery->bindValue('phone', $arrayParameters['phone'], PDO::PARAM_STR);
         $buildQuery->bindValue('mail', $arrayParameters['mail'], PDO::PARAM_STR);
-        return $buildQuery->exectute();
+        return $buildQuery->execute();
     }
 }
