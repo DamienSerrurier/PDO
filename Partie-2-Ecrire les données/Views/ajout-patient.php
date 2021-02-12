@@ -42,6 +42,9 @@ require '../Controllers/ajout-patient-controller.php';
         </div>
         <button type="submit" name="submitAddPatient" id="">Enregister le patient</button>
     </form>
+    <div>
+    <a href="liste-patients.php">Voire la liste des patients enregistrés</a>
+    </div>
 </body>
 
 </html>
