@@ -12,9 +12,8 @@
     <!-- Lien permettant la redirection de la page souhaité. -->
     <div>
         <a href="Views/ajout-patient.php">Enregistrer un patient</a>
-
-        <div>
-        </div>
+    </div>
+    <div>
         <a href="Views/liste-patients.php">Voir la liste des patients</a>
     </div>
 </body>
