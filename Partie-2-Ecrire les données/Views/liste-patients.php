@@ -18,6 +18,7 @@ require '../Controllers/liste-patients-controller.php';
     ?>
         <div>
             <p>N°<?= $value['id'] ?> : Nom : <?= strtoupper($value['lastname']) ?>, Prénom : <?= $value['firstname'] ?></p>
+            <a href="profil-patient.php?idPatient=<?= $value['id'] ?>">Voir le profil du patient</a>
         </div>
     <?php
     }
