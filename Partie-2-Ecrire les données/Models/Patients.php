@@ -1,7 +1,7 @@
 <?php
 
 //Création de la class Patients.
-class Patients extends DataBase
+class Patients extends Database
 {
     //Propriétés
     private $id;
@@ -95,5 +95,18 @@ class Patients extends DataBase
         $buildQuery->bindValue('phone', $arrayParameters['phone'], PDO::PARAM_STR);
         $buildQuery->bindValue('mail', $arrayParameters['mail'], PDO::PARAM_STR);
         return $buildQuery->execute();
+    }
+
+    public function addPatientsInformations()
+    {
+        $query = "SELECT * FROM `patients`";
+        $buildQuery = parent::getDatabase()->prepare($query);
+        $buildQuery->execute();
+        $resultQuery = $buildQuery->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($resultQuery)) {
+            return $resultQuery;
+        } else {
+            return false;
+        }
     }
 }
