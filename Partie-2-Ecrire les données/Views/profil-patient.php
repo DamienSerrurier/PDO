@@ -22,7 +22,12 @@ require '../Controllers/profil-patient-controller.php';
         <li>Adresse émail du patient : <?= isset($patientInformation['lastname']) ? $patientInformation['mail'] : $errorMessage ?></li>
     </ul>
     <div>
-        <a href="liste-patients.php">Voir la liste des patients</a>
+        <a href="liste-patients.php">Retour</a>
+    </div>
+    <div>
+        <form action="modification-patient.php" method="post">
+            <button type="submit" name="updatePatient" value="<?= isset($patientInformation['id']) ? $patientInformation['id'] : '' ?>">Modifier un patient</button>
+        </form>
     </div>
 </body>
 
