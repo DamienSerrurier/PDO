@@ -84,7 +84,12 @@ class Patients extends Database
         parent::__construct();
     }
 
-    //Méthode permettant de créer un patient.
+    /**
+     * Méthode qui permet d'ajouter un patient en base de données
+     * 
+     * @param array
+     * @param boolean
+     */
     public function addPatient($arrayParameters)
     {
         $query = "INSERT INTO `patients` (`lastname`, `firstname`, `birthdate`, `phone`, `mail`) VALUES (:lastname, :firstname, :birthdate, :phone, :mail)";
@@ -97,7 +102,12 @@ class Patients extends Database
         return $buildQuery->execute();
     }
 
-    public function addPatientsInformations()
+    /**
+     * Méthode qui permet de récupérer les informations de tous les patients
+     * 
+     * @return array|boolean
+     */
+    public function getPatientsInformations()
     {
         $query = "SELECT * FROM `patients`";
         $buildQuery = parent::getDatabase()->prepare($query);
@@ -110,7 +120,31 @@ class Patients extends Database
         }
     }
 
-    public function addOnePatientInformation($id)
+    /**
+     * Méthode permettant de récupérer uniquement l'id, le nom et le prénom de tous les patients en base.
+     * Le but de cette méthode est d'optimiser le temps de réponse de la page web en ne prenant que les données nécessaires en base de données.
+     * 
+     * @return array|boolean
+     */
+    public function getPatientsInformationsLight()
+    {
+        $query = "SELECT `id`, `lastname`, `firstname` FROM `patients`";
+        $buildQuery = parent::getDataBase()->prepare($query);
+        $buildQuery->execute();
+        $resultQuery = $buildQuery->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($resultQuery)) {
+            return $resultQuery;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Méthode qui permet de récupérer les informations d'un patient en particulier
+     * 
+     * @return array|boolean
+     */
+    public function getOnePatientInformation($id)
     {
         $query = "SELECT * FROM `patients` WHERE `id` = :id";
         $buildQuery = parent::getDatabase()->prepare($query);
@@ -124,6 +158,12 @@ class Patients extends Database
         }
     }
 
+    /**
+     * Méthode qui permet de modifier un patient existant
+     * 
+     * @param array
+     * @return boolean
+     */
     public function updatePatient($arrayParameters)
     {
         $query = "UPDATE `patients` SET `lastname` = :lastname, `firstname` = :firstname, `birthdate` = :birthdate, `phone` = :phone, `mail` = :mail WHERE `id` = :id";
