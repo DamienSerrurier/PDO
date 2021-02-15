@@ -92,7 +92,7 @@ class Patients extends Database
      */
     public function addPatient($arrayParameters)
     {
-        $query = "INSERT INTO `patients` (`lastname`, `firstname`, `birthdate`, `phone`, `mail`) VALUES (:lastname, :firstname, :birthdate, :phone, :mail)";
+        $query = "INSERT INTO `patients` (`lastname`, `firstname`, `birthdate`, `phone`, `mail`) VALUES (:lastname, :firstname, :birthdate, :phone, :mail);";
         $buildQuery = parent::getDatabase()->prepare($query);
         $buildQuery->bindValue('lastname', $arrayParameters['lastname'], PDO::PARAM_STR);
         $buildQuery->bindValue('firstname', $arrayParameters['firstname'], PDO::PARAM_STR);
@@ -109,7 +109,7 @@ class Patients extends Database
      */
     public function getPatientsInformations()
     {
-        $query = "SELECT * FROM `patients`";
+        $query = "SELECT * FROM `patients`;";
         $buildQuery = parent::getDatabase()->prepare($query);
         $buildQuery->execute();
         $resultQuery = $buildQuery->fetchAll(PDO::FETCH_ASSOC);
@@ -128,7 +128,7 @@ class Patients extends Database
      */
     public function getPatientsInformationsLight()
     {
-        $query = "SELECT `id`, `lastname`, `firstname` FROM `patients`";
+        $query = "SELECT `id`, `lastname`, `firstname` FROM `patients`;";
         $buildQuery = parent::getDataBase()->prepare($query);
         $buildQuery->execute();
         $resultQuery = $buildQuery->fetchAll(PDO::FETCH_ASSOC);
@@ -146,7 +146,7 @@ class Patients extends Database
      */
     public function getOnePatientInformation($id)
     {
-        $query = "SELECT * FROM `patients` WHERE `id` = :id";
+        $query = "SELECT * FROM `patients` WHERE `id` = :id;";
         $buildQuery = parent::getDatabase()->prepare($query);
         $buildQuery->bindValue('id', $id, PDO::PARAM_INT);
         $buildQuery->execute();
@@ -166,7 +166,7 @@ class Patients extends Database
      */
     public function updatePatient($arrayParameters)
     {
-        $query = "UPDATE `patients` SET `lastname` = :lastname, `firstname` = :firstname, `birthdate` = :birthdate, `phone` = :phone, `mail` = :mail WHERE `id` = :id";
+        $query = "UPDATE `patients` SET `lastname` = :lastname, `firstname` = :firstname, `birthdate` = :birthdate, `phone` = :phone, `mail` = :mail WHERE `id` = :id;";
         $buildQuery = parent::getDatabase()->prepare($query);
         $buildQuery->bindValue('id', $arrayParameters['id'], PDO::PARAM_INT);
         $buildQuery->bindValue('lastname', $arrayParameters['lastname'], PDO::PARAM_STR);
@@ -175,5 +175,26 @@ class Patients extends Database
         $buildQuery->bindValue('phone', $arrayParameters['phone'], PDO::PARAM_STR);
         $buildQuery->bindValue('mail', $arrayParameters['mail'], PDO::PARAM_STR);
         return $buildQuery->execute();
+    }
+
+    /**
+     * Méthode permettant de récupérer tous les RDV de la base associés aux noms et prénoms des patients concernés
+     * 
+     * @return array|boolean
+     */
+    public function getAllAppointmentsWhisAllPatientsInformations()
+    {
+        $query = "SELECT `appointments`.`id`, `patients`.`lastname`, `patients`.`firstname`, `appointments`.`dateHour`
+            FROM `patients`
+            INNER JOIN `appointments`
+            ON `patients`.`id` = `appointments`.`idPatients`;";
+        $buildQuery = parent::getDataBase()->prepare($query);
+        $buildQuery->execute();
+        $resultQuery = $buildQuery->fetchAll(PDO::FETCH_ASSOC);
+        if ($resultQuery) {
+            return $resultQuery;
+        } else {
+            return false;
+        }
     }
 }
