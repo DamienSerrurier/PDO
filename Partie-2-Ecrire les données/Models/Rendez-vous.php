@@ -49,14 +49,14 @@ class Appointments extends Database
     }
 
     /**
-     * Méthode permettant l'ajout d'un RDV en base de données
+     * Méthode permettant l'ajout d'un rendez-vous en base de données
      * 
      * @param array
      * @param boolean
      */
     public function addAppointment($arrayParameters)
     {
-        $query = "INSERT INTO `appointments` (`dateHour`, `idPatients`) VALUES (:dateHour, :idPatients)";
+        $query = "INSERT INTO `appointments` (`dateHour`, `idPatients`) VALUES (:dateHour, :idPatients);";
         $buildQuery = parent::getDataBase()->prepare($query);
         $buildQuery->bindValue('dateHour', $arrayParameters['dateHour'], PDO::PARAM_STR);
         $buildQuery->bindValue('idPatients', $arrayParameters['idPatients'], PDO::PARAM_INT);
