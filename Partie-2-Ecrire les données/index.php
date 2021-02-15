@@ -9,12 +9,15 @@
 </head>
 
 <body>
-    <!-- Lien permettant la redirection de la page souhaité. -->
+    <!-- Liens permettant la redirection des pages souhaitées. -->
     <div>
         <a href="Views/ajout-patient.php">Enregistrer un patient</a>
     </div>
     <div>
         <a href="Views/liste-patients.php">Voir la liste des patients</a>
+    </div>
+    <div>
+        <a href="views/ajout-rendez-vous.php">Ajouter un rendez-vous</a>
     </div>
 </body>
 
