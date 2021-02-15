@@ -14,7 +14,7 @@ if ((isset($_GET['idPatient'])) && !empty($_GET['idPatient'])) {
 
     if (preg_match($regexId, $id)) {
         $verifiedId = (int)$id;
-        $patientInformations =  $patient->addOnePatientInformation($verifiedId);
+        $patientInformations =  $patient->getOnePatientInformation($verifiedId);
     } else {
         $errorMessage = 'Arrête de jouer avec mon URL!';
     }
