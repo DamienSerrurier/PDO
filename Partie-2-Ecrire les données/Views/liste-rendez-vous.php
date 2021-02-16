@@ -16,9 +16,12 @@ require '../Controllers/liste-rendez-vous-controller.php';
     <?php
     foreach ($allAppointments as $key => $value) {
         $dateHourExplode = explode(' ', $value['dateHour']);
-        $formatDate = strftime('%A %d %B %Y', strtotime($dateHourExplode[0]));
+        $formatedDate = strftime('%A %d %B %Y', strtotime($dateHourExplode[0]));
     ?>
-        <p><?= 'Rendez-vous N° ' . $value['id'] . ' ' . 'du patient ' . strtoupper($value['lastname'])  . ' ' . $value['firstname'] . ' le ' . $formatDate . ' à ' . $dateHourExplode[1] ?></p>
+        <div>
+            <p><?= 'Rendez-vous N° ' . $value['id'] . ' ' . 'du patient ' . strtoupper($value['lastname'])  . ' ' . $value['firstname'] . ' le ' . $formatedDate . ' à ' . $dateHourExplode[1] ?></p>
+            <a href="rendez-vous.php?idAppointment=<?= $value['id'] ?>">Voir le rendez-vous du patient</a>
+        </div>
     <?php
     }
     ?>
