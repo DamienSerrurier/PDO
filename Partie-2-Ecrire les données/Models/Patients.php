@@ -90,7 +90,7 @@ class Patients extends Database
      * @param array
      * @param boolean
      */
-    public function addPatient($arrayParameters)
+    public function addPatient(array $arrayParameters)
     {
         $query = "INSERT INTO `patients` (`lastname`, `firstname`, `birthdate`, `phone`, `mail`) 
             VALUES (:lastname, :firstname, :birthdate, :phone, :mail);";
@@ -147,7 +147,7 @@ class Patients extends Database
      * 
      * @return array|boolean
      */
-    public function getOnePatientInformation($id)
+    public function getOnePatientInformation(int $id)
     {
         $query = "SELECT * FROM `patients` 
             WHERE `id` = :id;";
@@ -168,7 +168,7 @@ class Patients extends Database
      * @param array
      * @return boolean
      */
-    public function updatePatient($arrayParameters)
+    public function updatePatient(array $arrayParameters)
     {
         $query = "UPDATE `patients` 
             SET `lastname` = :lastname, `firstname` = :firstname, `birthdate` = :birthdate, `phone` = :phone, `mail` = :mail 
@@ -210,7 +210,7 @@ class Patients extends Database
      * @param int
      * @return array|boolean
      */
-    public function getOneAppointmentWithPatientInformationns($id)
+    public function getOneAppointmentWithPatientInformationns(int $id)
     {
         $query = "SELECT `appointments`.`id` AS `appointmentId`, `appointments`.`dateHour`, `patients`.`id` AS `patientId`, `patients`.`lastname`, `patients`.`firstname`, `patients`.`birthdate`, `patients`.`phone`, `patients`.`mail`
             FROM `patients`
