@@ -28,10 +28,10 @@ require '../Controllers/profil-patient-controller.php';
     <ul>
         <li>N° du patient : <?= isset($patientInformations['id']) ? $patientInformations['id'] : $errorMessage ?></li>
         <li>Nom de famille du patient : <?= isset($patientInformations['lastname']) ? strtoupper($patientInformations['lastname']) : $errorMessage ?></li>
-        <li>Prénom du patient : <?= isset($patientInformations['lastname']) ? $patientInformations['firstname'] : $errorMessage ?></li>
-        <li>Date de naissance du patient : <?= isset($patientInformations['lastname']) ? strftime('%d, %m, %Y', strtotime($patientInformations['birthdate'])) : $errorMessage ?></li>
-        <li>N° de téléphone du patient : <?= isset($patientInformations['lastname']) ? $patientInformations['phone'] : $errorMessage ?></li>
-        <li>Adresse émail du patient : <?= isset($patientInformations['lastname']) ? $patientInformations['mail'] : $errorMessage ?></li>
+        <li>Prénom du patient : <?= isset($patientInformations['firstname']) ? $patientInformations['firstname'] : $errorMessage ?></li>
+        <li>Date de naissance du patient : <?= isset($patientInformations['birthdate']) ? strftime('%d/ %m/ %Y', strtotime($patientInformations['birthdate'])) : $errorMessage ?></li>
+        <li>N° de téléphone du patient : <?= isset($patientInformations['phone']) ? $patientInformations['phone'] : $errorMessage ?></li>
+        <li>Adresse émail du patient : <?= isset($patientInformations['mail']) ? $patientInformations['mail'] : $errorMessage ?></li>
     </ul>
     <div>
         <a href="liste-patients.php">Retour</a>
