@@ -41,6 +41,34 @@ require '../Controllers/profil-patient-controller.php';
             <button type="submit" name="modifyPatientId" value="<?= isset($patientInformations['id']) ? $patientInformations['id'] : '' ?>">Modifier un patient</button>
         </form>
     </div>
+
+    <div>
+        <?php
+        if (!$patienttAppointmentsInformations) {
+
+        ?>
+            <p>Le patient n'a pas pris de rendez-vous.</p>
+        <?php
+        } else {
+        ?>
+            <p>Les rendez-vous du patient : </p>
+            <ul>
+                <?php
+                foreach ($patienttAppointmentsInformations as $key => $value) {
+                    $explodedDateHour = explode(' ', $value['dateHour']);
+                    $formatedDate = strftime('%A %d %B %Y', strtotime($explodedDateHour[0]));
+                ?>
+                    <li>Le <?= $formatedDate ?> à <?= $explodedDateHour[1] ?></li>
+                <?php
+                }
+                ?>
+            </ul>
+        <?php
+        }
+        ?>
+
+    </div>
+
 </body>
 
 </html>
