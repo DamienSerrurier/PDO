@@ -21,13 +21,33 @@ require '../Controllers/liste-rendez-vous-controller.php';
         <div>
             <p><?= 'Rendez-vous N° ' . $value['id'] . ' ' . 'du patient ' . strtoupper($value['lastname'])  . ' ' . $value['firstname'] . ' le ' . $formatedDate . ' à ' . $dateHourExplode[1] ?></p>
             <a href="rendez-vous.php?idAppointment=<?= $value['id'] ?>">Voir le rendez-vous du patient</a>
+            <button class="buttonTriggerAlert" style="background-color: red; color: white" data-target="<?= $value['id'] ?>">Supprimer ce rendez-vous</button>
         </div>
     <?php
     }
     ?>
+    
     <div>
         <a href="ajout-rendez-vous.php">Ajouter un rendez-vous</a>
     </div>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        let allButtonsTriggerAlert = document.getElementsByClassName('buttonTriggerAlert');
+        let arrayAllButtonsTriggerAlert = [...allButtonsTriggerAlert];
+
+        arrayAllButtonsTriggerAlert.forEach(element => {
+            element.addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Voulez-vous vraiment supprimer ce rendez-vous ?',
+                    showConfirmButton: false,
+                    html: `<form action="liste-rendez-vous.php" method="post">
+                    <button type="submit" name="deleteAppointment" value="${element.dataset.target}">Oui</button>
+                    </form>`
+                })
+            })
+        })
+    </script>
 </body>
 
 </html>
