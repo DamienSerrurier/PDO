@@ -15,6 +15,14 @@ require '../Controllers/rendez-vous-controller.php';
 <body>
     <ul>
         <?php
+        if (isset($_SESSION['message']) && $_SESSION['message'] != NULL) {
+        ?>
+            <div>
+                <p style="background-color: green;"><?= $_SESSION['message'] ?></p>
+            </div>
+        <?php
+            $_SESSION['message'] = NULL;
+        }
         if (isset($appointmentInformations)) {
         ?>
             <li>Le <?= $formatedDate ?> à <?= $dateHourExplode[1] ?></li>
@@ -23,6 +31,11 @@ require '../Controllers/rendez-vous-controller.php';
             <li>Date de naissance du patinet : <?= strftime('%d/ %m/ %Y', strtotime($appointmentInformations['birthdate'])) ?></li>
             <li>Numéro de téléphone du patient : <?= $appointmentInformations['phone'] ?></li>
             <li>Adresse émail du patient : <?= $appointmentInformations['mail'] ?></li>
+
+            <form action="modification-rendez-vous.php" method="post">
+                <button type="submit" name="modifyAppointmentId" value="<?= isset($appointmentInformations['appointmentId']) ? $appointmentInformations['appointmentId'] : '' ?>">Modifier le rendez-vous</button>
+            </form>
+
         <?php
         } else {
         ?>
@@ -30,8 +43,11 @@ require '../Controllers/rendez-vous-controller.php';
         <?php
         }
         ?>
-
     </ul>
+    <div>
+        <a href="liste-rendez-vous.php">Retour à la liste des rendez-vous</a>
+    </div>
+
 </body>
 
 </html>
