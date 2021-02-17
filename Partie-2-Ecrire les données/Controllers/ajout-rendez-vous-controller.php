@@ -7,7 +7,7 @@ $patients = new Patients();
 $allPatientsLight = $patients->getPatientsInformationsLight();
 
 if (!empty($_POST)) {
-
+    var_dump($_POST);
     $regexDate = '/^[1-2][0-9]{3}[-][0-1][0-9][-]([0-2][0-9]|[3][0-1])$/';
     $regexHour = '/^[0-9]{2}\:[0-9]{2}$/';
     $regecId =  '/^[0-9]+$/';
@@ -36,13 +36,13 @@ if (!empty($_POST)) {
         $arrayErrors['idPatients'] = 'Veuillez choisir une valeur.';
     }
 
-    if (!$arrayErrors) {
+    if (empty($arrayErrors)) {
 
         $dateHour = $checkDate . ' ' . $checkHour;
 
         $arrayParameters = [
             'dateHour' => $dateHour,
-            'idPatients' => $checkIdPatients
+            'idPatient' => $checkIdPatients
         ];
 
         $appointment = new Appointments();
