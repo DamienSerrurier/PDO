@@ -64,6 +64,26 @@ class Appointments extends Database
     }
 
     /**
+     * Méthode permettant de récupérer tous les rendez-vous d'un patient en particulier
+     * 
+     * @param int
+     * @return array|boolean
+     */
+    public function getAllAppointmentsByPatientId(int $idPatient)
+    {
+        $query = "SELECT `id`, `dateHour` FROM `appointments` WHERE `idPatients` = :idPatient;";
+        $buildQuery = parent::getDatabase()->prepare($query);
+        $buildQuery->bindValue('idPatient', $idPatient, PDO::PARAM_INT);
+        $buildQuery->execute();
+        $resultQuery = $buildQuery->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($resultQuery)) {
+            return $resultQuery;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Méthode qui permet de récupérer toutes les informations d'un rendez-vous par son id
      * 
      * @param int
@@ -100,6 +120,21 @@ class Appointments extends Database
         $buildQuery->bindValue('dateHour', $arrayParameters['dateHour'], PDO::PARAM_STR);
         $buildQuery->bindValue('idPatient', $arrayParameters['idPatient'], PDO::PARAM_INT);
         $buildQuery->bindValue('idAppointment', $arrayParameters['idAppointment'], PDO::PARAM_INT);
+        return $buildQuery->execute();
+    }
+
+    /**
+     * Méthode qui permet la suppression d'un rendez-vous via son Id
+     * 
+     * @param int
+     * @return boolean
+     */
+    public function deleteAppointmentById(int $id)
+    {
+        $query = "DELETE FROM `appointments` 
+            WHERE `id` = :id;";
+        $buildQuery = parent::getDatabase()->prepare($query);
+        $buildQuery->bindValue('id', $id, PDO::PARAM_INT);
         return $buildQuery->execute();
     }
 }
