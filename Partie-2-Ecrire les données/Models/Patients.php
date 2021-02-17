@@ -132,7 +132,7 @@ class Patients extends Database
     {
         $query = "SELECT `id`, `lastname`, `firstname` 
             FROM `patients`;";
-        $buildQuery = parent::getDataBase()->prepare($query);
+        $buildQuery = parent::getDatabase()->prepare($query);
         $buildQuery->execute();
         $resultQuery = $buildQuery->fetchAll(PDO::FETCH_ASSOC);
         if (!empty($resultQuery)) {
@@ -194,7 +194,7 @@ class Patients extends Database
             FROM `patients`
             INNER JOIN `appointments`
             ON `patients`.`id` = `appointments`.`idPatients`;";
-        $buildQuery = parent::getDataBase()->prepare($query);
+        $buildQuery = parent::getDatabase()->prepare($query);
         $buildQuery->execute();
         $resultQuery = $buildQuery->fetchAll(PDO::FETCH_ASSOC);
         if ($resultQuery) {
@@ -217,7 +217,7 @@ class Patients extends Database
             INNER JOIN `appointments`
             ON `patients`.`id` = `appointments`.`idPatients` 
             WHERE `appointments`.`id` = :id;";
-        $buildQuery = parent::getDataBase()->prepare($query);
+        $buildQuery = parent::getDatabase()->prepare($query);
         $buildQuery->bindValue('id', $id, PDO::PARAM_INT);
         $buildQuery->execute();
         $resultQuery = $buildQuery->fetch();
