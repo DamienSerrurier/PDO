@@ -16,6 +16,7 @@ if (isset($_POST['deleteAppointment']) && !empty($_POST['deleteAppointment'])) {
     $regexId = '/^[0-9]+$/';
 
     if (preg_match($regexId, $id)) {
+        
         $verifiedId = (int)$id;
         $resultDeleteAppointment =  $appointment->deleteAppointmentById($verifiedId);
     } else {
