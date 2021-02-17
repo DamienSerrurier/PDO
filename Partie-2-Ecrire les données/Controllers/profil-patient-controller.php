@@ -16,10 +16,10 @@ if ((isset($_GET['idPatient'])) && !empty($_GET['idPatient'])) {
     $regexId = '/^[0-9]+$/';
 
     if (preg_match($regexId, $id)) {
+        
         $verifiedId = (int)$id;
         $patientInformations =  $patient->getOnePatientInformation($verifiedId);
         $patienttAppointmentsInformations = $appointments->getAllAppointmentsByPatientId($verifiedId);
-        var_dump($patienttAppointmentsInformations);
     } else {
         $errorMessage = 'Arrête de jouer avec mon URL!';
     }
