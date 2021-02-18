@@ -265,4 +265,43 @@ class Patients extends Database
             return false;
         }
     }
+
+    /**
+     * Méthode qui permet de compter le nombre de patients en base de données
+     * 
+     * @return array|boolean
+     */
+    public function countPatients()
+    {
+        $query = "SELECT COUNT(*) AS `countPatients` 
+            FROM `patients`;";
+        $buildQuery = parent::getDatabase()->prepare($query);
+        $buildQuery->execute();
+        $resultQuery = $buildQuery->fetch(PDO::FETCH_ASSOC);
+        if (!empty($resultQuery)) {
+            return $resultQuery;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Méthode qui permet de récupérer 10 patients en fonction d'une valeur de début
+     * 
+     * @param int
+     * @return array|boolean
+     */
+    public function getPatientsPaginate(int $startValue)
+    {
+        $query = "SELECT * FROM `patients` LIMIT :startValue , 10;";
+        $buildQuery = parent::getDatabase()->prepare($query);
+        $buildQuery->bindValue('startValue', $startValue, PDO::PARAM_INT);
+        $buildQuery->execute();
+        $resultQuery = $buildQuery->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($resultQuery)) {
+            return $resultQuery;
+        } else {
+            return false;
+        }
+    }
 }
