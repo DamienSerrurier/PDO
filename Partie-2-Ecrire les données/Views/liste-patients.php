@@ -34,7 +34,23 @@ require '../Controllers/liste-patients-controller.php';
 
         <?php
         }
+
+        if (isset($totalPages)) {
         ?>
+            <a href="liste-patients.php?page=<?= $actualPage > 1 ? $actualPage - 1 : 1 ?>"><<</a>
+            <?php
+
+            for ($page = 1; $page <= $totalPages; $page++) {
+            ?>
+                <a href="liste-patients.php?page=<?= $page ?>"><?= $page ?></a>
+        <?php
+            }
+            ?>
+            <a href="liste-patients.php?page=<?= $actualPage < $totalPages ? $actualPage + 1 : $totalPages ?>">>></a>
+            <?php
+        }
+        ?>
+
     <?php
     } else {
     ?>
