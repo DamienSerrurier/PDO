@@ -243,6 +243,12 @@ class Patients extends Database
         return $buildQuery->execute();
     }
 
+    /**
+     * Méthode qui permet de rechercher un patient sur son prénom ou son nom
+     * 
+     * @param string
+     * @return array|boolean
+     */
     public function searchPatient(string $search)
     {
         $query = "SELECT * FROM `patients` 
