@@ -242,4 +242,21 @@ class Patients extends Database
         $buildQuery->bindValue('id', $id, PDO::PARAM_INT);
         return $buildQuery->execute();
     }
+
+    public function searchPatient(string $search)
+    {
+        $query = "SELECT * FROM `patients` 
+            WHERE `lastname` LIKE :search1 OR `firstname` LIKE :search2 
+            ORDER BY `lastname`;";
+        $buildQuery = parent::getDatabase()->prepare($query);
+        $buildQuery->bindValue('search1', $search, PDO::PARAM_STR);
+        $buildQuery->bindValue('search2', $search, PDo::PARAM_STR);
+        $buildQuery->execute();
+        $resultQuery = $buildQuery->fetchALL(PDO::FETCH_ASSOC);
+        if (!empty($resultQuery)) {
+            return $resultQuery;
+        } else {
+            return false;
+        }
+    }
 }
