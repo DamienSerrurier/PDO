@@ -19,7 +19,9 @@ require '../Controllers/liste-patients-controller.php';
         <div>
             <p>N°<?= $value['id'] ?> : Nom : <?= strtoupper($value['lastname']) ?>, Prénom : <?= $value['firstname'] ?></p>
             <a href="profil-patient.php?idPatient=<?= $value['id'] ?>">Voir le profil du patient</a>
+            <button class="buttonTriggerAlert" style="background-color: red; color: white" data-target="<?= $value['id'] ?>">Supprimer ce patient</button>
         </div>
+
     <?php
     }
     ?>
@@ -27,6 +29,24 @@ require '../Controllers/liste-patients-controller.php';
     <div>
         <a href="ajout-patient.php">Ajouter un patient</a>
     </div>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        let allButtonsTriggerAlert = document.getElementsByClassName('buttonTriggerAlert');
+        let arrayAllButtonsTriggerAlert = [...allButtonsTriggerAlert];
+
+        arrayAllButtonsTriggerAlert.forEach(element => {
+            element.addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Voulez-vous vraiment supprimer ce patient ?',
+                    showConfirmButton: false,
+                    html: `<form action="liste-patients.php" method="post">
+                    <button type="submit" name="deletePatient" value="${element.dataset.target}">Oui</button>
+                    </form>`
+                })
+            })
+        })
+    </script>
 </body>
 
 </html>
