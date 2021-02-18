@@ -227,4 +227,19 @@ class Patients extends Database
             return false;
         }
     }
+
+    /**
+     * Méthode qui permet de supprimer à la fois un patient et ses rendez-vous via son Id
+     * 
+     * @param int
+     * @return boolean
+     */
+    public function deletePatientById(int $id)
+    {
+        $query = "DELETE FROM `patients` 
+            WHERE `id` = :id;";
+        $buildQuery = parent::getDatabase()->prepare($query);
+        $buildQuery->bindValue('id', $id, PDO::PARAM_INT);
+        return $buildQuery->execute();
+    }
 }
