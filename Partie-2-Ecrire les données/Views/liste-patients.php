@@ -13,15 +13,34 @@ require '../Controllers/liste-patients-controller.php';
 </head>
 
 <body>
+    <form action="liste-patients.php" method="post">
+        <label for="search">Rechercher un patient : </label>
+        <input type="text" name="search" id="search">
+        <button type="submit" name="searchPatient">Rechercher</button>
+    </form>
+    <a href="liste-patients.php">
+        <button type="button">Réinitialiser la recherche</button>
+    </a>
     <?php
-    foreach ($patientsInformations as $key => $value) {
+    if (!empty($patientsInformations)) {
+
+        foreach ($patientsInformations as $key => $value) {
+    ?>
+            <div>
+                <p>N°<?= $value['id'] ?> : Nom : <?= strtoupper($value['lastname']) ?>, Prénom : <?= $value['firstname'] ?></p>
+                <a href="profil-patient.php?idPatient=<?= $value['id'] ?>">Voir le profil du patient</a>
+                <button class="buttonTriggerAlert" style="background-color: red; color: white" data-target="<?= $value['id'] ?>">Supprimer ce patient</button>
+            </div>
+
+        <?php
+        }
+        ?>
+    <?php
+    } else {
     ?>
         <div>
-            <p>N°<?= $value['id'] ?> : Nom : <?= strtoupper($value['lastname']) ?>, Prénom : <?= $value['firstname'] ?></p>
-            <a href="profil-patient.php?idPatient=<?= $value['id'] ?>">Voir le profil du patient</a>
-            <button class="buttonTriggerAlert" style="background-color: red; color: white" data-target="<?= $value['id'] ?>">Supprimer ce patient</button>
+            <p style="background-color: salmon;">Il n'y a aucun résulta de recherche</p>
         </div>
-
     <?php
     }
     ?>
