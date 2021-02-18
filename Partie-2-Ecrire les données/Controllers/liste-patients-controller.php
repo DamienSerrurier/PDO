@@ -19,7 +19,15 @@ if (isset($_POST['deletePatient']) && !empty($_POST['deletePatient'])) {
     }
 }
 
-$patientsInformations = $patients->getPatientsInformations();
+if (isset($_POST['searchPatient'])) {
+
+    $search = htmlspecialchars($_POST['search']);
+    $querySearch = '%' . $search . '%';
+    $patientsInformations = $patients->searchPatient($querySearch);
+} else {
+    $patientsInformations = $patients->getPatientsInformations();
+}
+
 
 if (!$patientsInformations) {
     $errorMessage = 'Il y a eu un problème lors de la récupération des données sur les patients.';
