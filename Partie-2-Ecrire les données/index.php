@@ -17,7 +17,13 @@
         <a href="Views/liste-patients.php">Voir la liste des patients</a>
     </div>
     <div>
-        <a href="views/ajout-rendez-vous.php">Ajouter un rendez-vous</a>
+        <a href="Views/ajout-rendez-vous.php">Ajouter un rendez-vous</a>
+    </div>
+    <div>
+        <a href="Views/liste-rendez-vous.php">Voir la liste des rendez-vous</a>
+    </div>
+    <div>
+        <a href="Views/ajout-patient-rendez-vous.php">Enregister un patient et un rendez-vous</a>
     </div>
 </body>
 
