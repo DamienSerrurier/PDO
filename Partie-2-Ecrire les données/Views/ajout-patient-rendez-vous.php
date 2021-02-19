@@ -39,12 +39,12 @@ require '../Controllers/ajout-patient-rendez-vous-controller.php';
 
         <!-- Partie du formulaire pour les rendez-vous -->
         <div>
-            <label for="date">Date du rendez-vous</label>
+            <label for="date">Date du rendez-vous : </label>
             <input type="date" name="date" id="date" required>
             <?= isset($arrayErrors['date']) ? '<p style="color:red;> ' . $arrayErrors['date'] . '</p>' : '' ?>
         </div>
         <div>
-            <label for="hour">Heure du rendez-vous</label>
+            <label for="hour">Heure du rendez-vous : </label>
             <input type="time" name="hour" id="hour" required>
             <?= isset($arrayErrors['hour']) ? '<p style="color:red;> ' . $arrayErrors['hour'] . '</p>' : '' ?>
         </div>
