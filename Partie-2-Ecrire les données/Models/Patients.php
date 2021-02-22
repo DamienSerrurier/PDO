@@ -184,7 +184,7 @@ class Patients extends Database
     }
 
     /**
-     * Méthode permettant de récupérer tous les RDV de la base associés aux noms et prénoms des patients concernés
+     * Méthode permettant de récupérer tous les rendez-vous de la base associés aux noms et prénoms des patients concernés
      * 
      * @return array|boolean
      */
